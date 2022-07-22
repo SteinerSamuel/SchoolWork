@@ -1,0 +1,37 @@
+java -jar HW05.jar 
+Welcome to wumpus world, lets configure your game.
+First, lets decided on how big the maze is. How many rows are there:
+3
+Next, how many columns are there:
+3
+How many arrows should the player have
+100
+Where would you like to start?
+X(which column)?
+0
+Y(which row)?
+0
+What chance do you want a room to have a pit
+0
+What chance do you want a room to have a bat
+0
+Do you want the maze to be perfect y/n?
+y
+Do you want the maze to be wrapping? y/n?
+n
+You are at position 0, 0, would you like to move(m) or shoot(a)?
+
+m
+Where would you like to move?
+ You're legal moves are: [EAST]
+e
+You are at position 1, 0, would you like to move(m) or shoot(a)?
+You smell the wumpus
+
+
+m
+Where would you like to move?
+ You're legal moves are: [SOUTH, WEST]
+w
+Chomp, chomp, chomp, thanks for feeding the Wumpus!
+Better luck next time

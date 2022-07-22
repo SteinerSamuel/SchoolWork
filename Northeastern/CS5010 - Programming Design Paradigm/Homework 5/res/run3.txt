@@ -1,0 +1,32 @@
+ava -jar HW05.jar 
+Welcome to wumpus world, lets configure your game.
+First, lets decided on how big the maze is. How many rows are there:
+3
+Next, how many columns are there:
+3
+How many arrows should the player have
+5
+Where would you like to start?
+X(which column)?
+0
+Y(which row)?
+0
+What chance do you want a room to have a pit
+0
+What chance do you want a room to have a bat
+0
+Do you want the maze to be perfect y/n?
+y
+Do you want the maze to be wrapping? y/n?
+n
+You are at position 0, 0, would you like to move(m) or shoot(a)?
+You smell the wumpus
+
+a
+Where would you like to Shoot?
+ You're legal moves are: [EAST]
+How many rooms to shoot, between 1 and 3
+1
+e
+Hee hee hee, you got the wumpus!
+Next time you won't be so lucky

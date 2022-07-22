@@ -1,0 +1,11 @@
+This is the aviary located at West Wing. The following birds are in this aviary:
+Herbert is a Hawk: Hawks are not extinct have 2 wings and eat small mammals, fish, other birds. They have the following characteristics: Large, Sharp beak, Visible nostrils. 
+Hal is a Hawk: Hawks are not extinct have 2 wings and eat small mammals, fish, other birds. They have the following characteristics: Large, Sharp beak, Visible nostrils. 
+
+This is the aviary located at East Wing. The following birds are in this aviary:
+Earl is a Emu: Emus are not extinct have 2 wings and eat seeds, vegetation. They have the following characteristics: Vestigial wings, Sharp claws, Flightless. 
+
+
+Earl is in the aviary located at East Wing, 
+Hal is in the aviary located at West Wing, 
+Herbert is in the aviary located at West Wing

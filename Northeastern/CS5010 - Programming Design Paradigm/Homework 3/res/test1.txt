@@ -1,0 +1,45 @@
+$ java -jar HW03-Maze.jar -rows 10 -cols 10 -goldValue 10 -playerX 0 -playerY 0 -goalX 2 -goalY 2 -imperfect 10 -wrapping
+Welcome to the maze you can move around by typing the first character of the cardinal directions (N, E, S, W).
+You are currently at tile (0, 0), your gold is 0, your possible moves are:[NORTH, SOUTH, WEST]
+n
+You are currently at tile (0, 9), your gold is 0, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+n
+You are currently at tile (0, 8), your gold is 0, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+n
+The location has gold of value: 10
+You are currently at tile (0, 7), your gold is 10, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+n
+You are currently at tile (0, 6), your gold is 10, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+s
+You are currently at tile (0, 7), your gold is 10, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+e
+The location has gold of value: 10
+You are currently at tile (1, 7), your gold is 20, your possible moves are:[SOUTH, EAST, WEST]
+e
+You are currently at tile (2, 7), your gold is 20, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+e
+You are currently at tile (3, 7), your gold is 20, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+e
+The location has a thief he steals 10% of your gold
+You are currently at tile (4, 7), your gold is 18, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+e
+You are currently at tile (5, 7), your gold is 18, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+n
+You are currently at tile (5, 6), your gold is 18, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+w
+The location has gold of value: 10
+You are currently at tile (4, 6), your gold is 28, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+w
+You are currently at tile (3, 6), your gold is 28, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+w
+The location has a thief he steals 10% of your gold
+You are currently at tile (2, 6), your gold is 25, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+n
+You are currently at tile (2, 5), your gold is 25, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+n
+The location has a thief he steals 10% of your gold
+You are currently at tile (2, 4), your gold is 22, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+n
+You are currently at tile (2, 3), your gold is 22, your possible moves are:[NORTH, SOUTH, EAST, WEST]
+n
+You Won, you completed the maze your final gold was: 22

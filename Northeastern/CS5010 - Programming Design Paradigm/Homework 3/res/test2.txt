@@ -1,0 +1,28 @@
+$ java -jar HW03-Maze.jar -rows 3 -cols 3 -goldValue 10 -playerX 0 -playerY 0 -goalX 2 -goalY 2 -seed 555
+Welcome to the maze you can move around by typing the first character of the cardinal directions (N, E, S, W).
+You are currently at tile (0, 0), your gold is 0, your possible moves are:[SOUTH, EAST]
+s
+You are currently at tile (0, 1), your gold is 0, your possible moves are:[NORTH, SOUTH]
+s
+You are currently at tile (0, 2), your gold is 0, your possible moves are:[NORTH]
+N
+You are currently at tile (0, 1), your gold is 0, your possible moves are:[NORTH, SOUTH]
+N
+You are currently at tile (0, 0), your gold is 0, your possible moves are:[SOUTH, EAST]
+e
+You are currently at tile (1, 0), your gold is 0, your possible moves are:[SOUTH, EAST, WEST]
+E
+The location has gold of value: 10
+You are currently at tile (2, 0), your gold is 10, your possible moves are:[SOUTH, WEST]
+S
+You are currently at tile (2, 1), your gold is 10, your possible moves are:[NORTH]
+n
+You are currently at tile (2, 0), your gold is 10, your possible moves are:[SOUTH, WEST]
+w
+You are currently at tile (1, 0), your gold is 10, your possible moves are:[SOUTH, EAST, WEST]
+s
+You are currently at tile (1, 1), your gold is 10, your possible moves are:[NORTH, SOUTH]
+s
+You are currently at tile (1, 2), your gold is 10, your possible moves are:[NORTH, EAST]
+e
+You Won, you completed the maze your final gold was: 10
