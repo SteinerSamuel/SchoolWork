@@ -1,0 +1,37 @@
+version: "3"
+services: 
+
+  keycloak:
+    image: jboss/keycloak
+    environment: 
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_IMPORT: /tmp/realm-import.json
+    volumes:
+      - ./backend/keycloak/theme/register.ftl:/opt/jboss/keycloak/themes/base/register.ftl
+      - ./backend/keycloak/realm/realm-import.json:/tmp/realm-import.json 
+    ports:
+      - "8090:8080"
+
+  app:
+    build: ./backend/app
+    links:
+      - db
+    ports:
+      - "5000:5000"
+
+  fe_app:
+    build: ./frontend
+    links:
+      - app
+    ports:
+      - "8080:8080"
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./backend/db:/docker-entrypoint-initdb.d/:ro
+    ports:
+        -  "9000:3306"
