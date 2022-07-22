@@ -1,0 +1,15 @@
+jupyterlab
+jupyter
+numpy
+matplotlib
+tqdm
+torch
+torchvision
+torchaudio
+black
+meteostat
+pandas
+tensorboard
+sklearn
+matplotlib
+sklearn
