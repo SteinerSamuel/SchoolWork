@@ -1,0 +1,389 @@
+\documentclass[a4 paper]{article}
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{./Problem6/}}
+\usepackage{mathptmx}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+
+\begin{document}
+	\begin{center}
+  	\framebox{
+    	\vbox{
+      	\vspace{2mm}
+        \hbox to 6.28in {{\bf CS 6140:  Machine Learning \hfill {\small Samuel Steiner steiner.s@husky.neu.edu}}}
+        \vspace{5 mm}
+        \hbox to 6.28in { {\Large \hfill  Homework Assignment \#2 \hfill}}
+        \vspace{5 mm}
+        \hbox to 6.28in {$\mathit{Assigned: 02/16/2021}$ \hfill \emph{Due:\ 03/01/2021, 11:59pm,\ through\ Canvas}}
+     }
+   }
+    Three problems, 100 points in total. Good luck!
+    
+		Prof. Predrag Radivojac, Northeastern University
+	\end{center}
+	
+	\textbf{Problem 1.}  (20 points) Naive Bayes classifier. Consider the following binary classification problem where there are 8 data points in the training set. That is,
+	\begin{equation*}
+	\pazocal{D} = \{(-1,-1,-1,-),(-1, -1, 1, +),(-1, 1, -1, +),(-1, 1, 1, -),(1, -1, -1, +),(1, -1, 1, -),(1, 1, -1, -),(1, 1, 1, +)\},
+	\end{equation*}
+	where each tuple $(x_1,x_2,x_3,y)$ represents a training example with input vector $(x_1,x_2,x_3)$ and class label $y$.
+	\begin{enumerate}
+	\item[a)] (10 points) Construct a naive Bayes classifier for this problem and evaluate its accuracy on the training set. Measure accuracy as the fraction of correctly classified examples.
+	
+	Stated in Radivojac \& White "let $\pazocal{X}$ and $\pazocal{Y}$ be an input and output space respectively with $\pazocal{Y}$ being discrete ... the decision rule for labeling a data point is
+	\begin{equation*}
+	\begin{split}
+	\hat{y}  & = \argmax_{y\in\pazocal{Y}} p(y \mid x) \\
+	& = \argmax_{y\in\pazocal{Y}}\{p(x\mid y)p(y)\}
+	\end{split}
+	\end{equation*}
+	...
+	assuming $d$-dimensional inputs we can write 
+	\begin{equation*}
+	p(x \mid y) = \prod^d_{j=1}p(x_j \mid y).
+	\end{equation*}
+	"
+\begin{table}[!htb]
+        \begin{minipage}{1\linewidth}
+      \centering
+      \caption{Probability table for $y$}
+ 		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$y$  & - & + & p(-) & p(+) \\ \hline \hline
+				 &  4 &  4 &  1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage}
+   
+    \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x_1$}
+		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_1$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  2 &  2 &  1/2   &   1/2   \\ \hline
+			-1 & 2  &  2 &   1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage}%
+    \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x_2$}
+		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_2$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  2 &  2 &  1/2   &   1/2   \\ \hline
+			-1 & 2  &  2 &   1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage} %
+        \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x_3$}
+ 		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_3$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  2 &  2 &  1/2   &   1/2   \\ \hline
+			-1 & 2  &  2 &   1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage} 
+\end{table}
+\linebreak
+For our $\pazocal{D}$ we have a problem where all values are the same and the conditional probabilities are the same so in the end our values are the same. The classifier will 'randomly' select a class to give the data set. For all  possible $\pazocal{X}$ and for each $y \in \pazocal{Y}$  meaning the accuracy for this classifier is undetermined:
+	\begin{equation*}
+	\begin{split}
+	p(x_1|y) * p(x_1|y) * p(x_1|y) * p(y) \\
+	\frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} & = 1/16
+	\end{split}
+	\end{equation*}
+	\item[b)] (10 points) Transform the input space into a higher-dimensional space
+	\begin{equation*}
+	 (x1, x2, x3, x_1x_2, x_1x_3, x_2x_3, x_1x_2x_3, x^2_1, x^2_2, x^2_3, x^2_1x_2, x_1x^2_2, x_1x^2_3, x^2_2x_3, x_2x^2_3)
+	\end{equation*}
+	and repeat the previous step.
+	
+	Carry out all steps manually and show all your calculations. Discuss your main observations.
+	\begin{table}[!htb]
+        \begin{minipage}{1\linewidth}
+      \centering
+      \caption{Probability table for $x_1,x_2,x_3$}
+ 		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_1x_2x_3$  & - & + & p(-) & p(+) \\ \hline \hline
+				1	& 0	&	4 & 0	 & 1 \\ \hline
+				-1 & 4 & 0 & 1 & 0 \\  \hline \hline
+				total & 4 & 4 & 1  & 1 \\ \hline
+		\end{tabular}
+    \end{minipage}
+   
+    \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x_1^2$}
+		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_1^2$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  4 &  4 &  1   &   1   \\ \hline
+		\end{tabular}
+    \end{minipage}%
+    \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x_2^2$}
+		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_2^2$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  4 &  4 &  1   &   1   \\ \hline
+		\end{tabular}
+    \end{minipage} %
+        \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x_3^2$}
+		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_3^2$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  4 &  4 &  1   &   1   \\ \hline
+		\end{tabular}
+    \end{minipage} 
+    
+    \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x_1x_2$}
+		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_1x_2$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  2 &  2 &  1/2   &   1/2   \\ \hline
+			-1 & 2  &  2 &   1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage}%
+    \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x_1x_3$}
+		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_1x_3$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  2 &  2 &  1/2   &   1/2   \\ \hline
+			-1 & 2  &  2 &   1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage} %
+        \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x_2x_3$}
+ 		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_2x_3$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  2 &  2 &  1/2   &   1/2   \\ \hline
+			-1 & 2  &  2 &   1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage} 
+    
+        \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x_1x_2^2$}
+		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_1x_2^2$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  2 &  2 &  1/2   &   1/2   \\ \hline
+			-1 & 2  &  2 &   1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage}%
+    \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x_1x^2_3$}
+		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_1x^2_3$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  2 &  2 &  1/2   &   1/2   \\ \hline
+			-1 & 2  &  2 &   1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage} %
+        \begin{minipage}{.33\linewidth}
+      \centering
+      \caption{Probability table for $x^2_2x_3$}
+ 		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x^2_2x_3$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  2 &  2 &  1/2   &   1/2   \\ \hline
+			-1 & 2  &  2 &   1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage} 
+        \begin{minipage}{.50\linewidth}
+      \centering
+      \caption{Probability table for $x_1^2x_2$}
+		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_1^2x_2$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  2 &  2 &  1/2   &   1/2   \\ \hline
+			-1 & 2  &  2 &   1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage}%
+    \begin{minipage}{.50\linewidth}
+      \centering
+      \caption{Probability table for $x_2x^2_3$}
+		\begin{tabular}{|l||l|l|l|l|} \hline 
+			$x_2x^2_3$  & - & + & p(-) & p(+) \\ \hline \hline
+			1  &  2 &  2 &  1/2   &   1/2   \\ \hline
+			-1 & 2  &  2 &   1/2   &   1/2   \\ \hline
+		\end{tabular}
+    \end{minipage} %
+\end{table}
+\linebreak
+Since the conditional probability for all $p(x|y)$ are the same not counting $x_1x_2x_3$ the only consideration should be $x_1x_2x_3$. Here are the calculations for all 8 data points 
+\begin{equation*}
+\begin{split}
+\pazocal{D}_{1 (Y=-)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 1 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 1/2048\\
+\pazocal{D}_{1 (Y=+)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 0 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 0 \\
+\\
+\pazocal{D}_{2 (Y=-)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 0 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 0\\
+\pazocal{D}_{2 (Y=+)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 1 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 1/2048 \\
+\\
+\pazocal{D}_{3 (Y=-)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 0 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 0\\
+\pazocal{D}_{3 (Y=+)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 1 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 1/2048 \\
+\\
+\pazocal{D}_{4 (Y=-)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 1 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 1/2048\\
+\pazocal{D}_{4 (Y=+)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 0 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 0 \\
+\\
+\pazocal{D}_{5 (Y=-)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 0 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 0\\
+\pazocal{D}_{5 (Y=+)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 1 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 1/2048 \\
+\\
+\pagebreak
+\end{split}
+\end{equation*}
+\begin{equation*}
+\begin{split}
+\pazocal{D}_{6 (Y=-)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 1 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 1/2048\\
+\pazocal{D}_{6 (Y=+)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 0 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 0 \\
+\\
+\pazocal{D}_{7 (Y=-)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 1 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 1/2048\\
+\pazocal{D}_{7 (Y=+)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 0 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 0 \\
+\\
+\pazocal{D}_{8 (Y=-)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 0 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 0\\
+\pazocal{D}_{8 (Y=+)} & = \frac{1}{2} *  \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * 1 * 1 * 1 * 1 *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} *  \frac{1}{2} = 1/2048 \\
+\\
+\end{split}
+\end{equation*}
+This classifier has a 100\% accuracy. as stated earlier the classifier is wholly reliant on the $x_1x_2x_3$ data point in the input space. The reason why this happens is because our data is distributed in a way where $p(x \mid y )$ of any value in the data set of part a is the same. 
+	\end{enumerate}
+	
+	\textbf{Problem 2.} (25 points) Consider a binary classification problem in which we want to determine the optimal decision surface. A point $\mathbf{x}$ is on the decision surface if $P(Y = 1 \mid x) = P(Y=0 \mid x)$.
+	\begin{enumerate}
+	\item[a)] (10 points) Find the optimal decision suface assuming that each class-conditional distribution is defined as a two-dimensional Gaussian distribution. 
+	\begin{equation*}
+	p(x \mid Y = i )  = \frac{1}{(2\pi)^{d/2}|\Sigma_i|^{1/2}} * e^{-\frac{1}{2}(x-m_i)^T\Sigma_i^{-1}(x-m_i)}
+	\end{equation*}
+	where $ i \in \{0,1\}$, $m_0 = (1,2), m_1=(6,3), \Sigma_0 = \Sigma_1 = \mathbf{I}_2, P(Y=0) = P(Y=1) = 1/2, \mathbf{I}_d$ is the $d$-dimensional identity matrix, and $|\Sigma_i|$ is the determinant of $\Sigma_i$.
+	
+	\begin{equation*}
+	\begin{split}
+	P(Y = 1 | x) & = P(Y=0 | x) \\
+	\frac{P(x | Y=1)P(Y=1)}{P(x)} & = \frac{P(x | Y=0)P(Y=0)}{P(x)} \\
+	P(x | Y=1)P(Y=1) & = P(x | Y=0)P(Y=0) \\
+	P(Y=1) = P(Y=0) & \implies   P(x | Y=1)  = P(x | Y=0) \\
+	d=2\\
+	 \frac{1}{(2\pi)|\Sigma_1|^{1/2}} * e^{-\frac{1}{2}(x-m_1)^T\Sigma_1^{-1}(x-m_1)} & = 	 \frac{1}{(2\pi)|\Sigma_0|^{1/2}} * e^{-\frac{1}{2}(x-m_0)^T\Sigma_0^{-1}(x-m_0)} \\
+	 \Sigma_1 = \Sigma_2 & \implies \\ 
+	 e^{-\frac{1}{2}(x-m_1)^T\Sigma^{-1}(x-m_1)} & = e^{-\frac{1}{2}(x-m_0)^T\Sigma^{-1}(x-m_0)} \\ 
+	 \text{log both} & \text{ sides to simplify} \\
+	 	-\frac{1}{2}(x-m_1)^T\Sigma^{-1}(x-m_1) & = -\frac{1}{2}(x-m_0)^T\Sigma^{-1}(x-m_0) \\
+	 	\text{simplify both sides} \\
+	 	x^T\Sigma^{-1}m_1-\frac{1}{2}m_1^T\Sigma^{-1}m_1 - \frac{1}{2}x^T\Sigma^{-1} & = x^T\Sigma^{-1}m_0-\frac{1}{2}m_0^T\Sigma^{-1}m_0 - \frac{1}{2}x^T\Sigma^{-1} \\
+	 	x^T\Sigma^{-1}m_1-\frac{1}{2}m_1^T\Sigma^{-1}m_1  & = x^T\Sigma^{-1}m_0-\frac{1}{2}m_0^T\Sigma^{-1}m_0 \\
+	 	-\frac{1}{2}(m_1+m_0)^T\Sigma^{-1}(m_1-m_0) + x^T\Sigma^{-1}(m_1-m_0) & = 0 \\
+	 	-\frac{1}{2}(\begin{bmatrix} 6 & 3 \end{bmatrix} + \begin{bmatrix} 1 & 2 \end{bmatrix}) \begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}(\begin{bmatrix} 6 \\ 3 \end{bmatrix} - \begin{bmatrix} 1 \\ 2 \end{bmatrix}) + \begin{bmatrix} x_0 & 0\\0 & x_1\end{bmatrix}\begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}(\begin{bmatrix} 6 \\ 3 \end{bmatrix} - \begin{bmatrix} 1 \\ 2 \end{bmatrix}) & = 0 \\
+	 	-\frac{1}{2}\begin{bmatrix} 7 & 5 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}\begin{bmatrix} 5 \\ 1 \end{bmatrix} + \begin{bmatrix} x_0 & 0\\0 & x_1\end{bmatrix}\begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}\begin{bmatrix} 5 \\ 1 \end{bmatrix} & = 0 \\
+	 	-20 + 5x_0 + x_1 & =0
+	\end{split}
+	\end{equation*}
+	
+	\item[b)] (5 points) Generalize the solution from part (a) using $m_0 = (m_{01},m_{02}), m_1 = (m_{11}, m_{12}), \Sigma_0 = \Sigma_1 = \sigma^2\mathbf{I}_2$ and $P(Y=0) \neq P(Y=1)$. 
+	For $P(Y=0) \neq P(Y=1)$ lets say $p_y = P(Y=y)$ instead of canceling out they would be logged turned into addition then in the last steps when combined would be turned into subtraction or simplified to $\log\frac{p_0}{p_1}$ making the final equation 
+	\begin{equation*}
+	\log{\frac{p_0}{p_1}}-\frac{1}{2}(m_1+m_0)^T\Sigma^{-1}(m_1-m_0) + x^T\Sigma^{-1}(m_1-m_0) = 0
+	\end{equation*}
+	for $\sigma^2\mathbf{I}_2$ the $\Sigma^{-1}$ would become
+	\begin{equation*}
+	\begin{bmatrix}
+	1/\sigma^2 & 0 \\
+	0 & 1/\sigma^2
+	\end{bmatrix}
+	\end{equation*}
+	
+	for $(m_1+,m_0)^T$ the matrix would become
+	\begin{equation*}
+	\begin{bmatrix}
+	m_{11} + m_{01} & m_{12} + m_{02} 
+	\end{bmatrix}
+	\end{equation*}
+	
+	for $m_1+,m_0$ the matrix would become
+	\begin{equation*}
+	\begin{bmatrix}
+	m_{11} - m_{01} \\ m_{12} - m_{02}
+	\end{bmatrix}
+	\end{equation*}
+	The final equation would look like this
+	\begin{equation*}
+	\log{\frac{p_0}{p_1}}-\frac{1}{2}(\frac{1}{\sigma^2}(m_{11}^2-m_{01}^2 + m_{12}^2 - m_{02}^2)) +  x_0\frac{1}{\sigma^2}(m_{11} - m_{01}) + x_1(\frac{1}{\sigma^2}(m_{12} + m _{02})) = 0
+	\end{equation*}
+	
+	\item[c)] (10 points) Generalize the solution from part (b) to arbitrary co-variance matrices $\Sigma_0$ and $\Sigma_1$. Discuss the shape of the optimal decision surface.
+	
+	We would not be able to remove the  $\frac{1}{(2\pi)|\Sigma_i|^{1/2}}$ , when we log both sides this would transform into 
+	\begin{equation*}
+	\log{\frac{1}{(2\pi)}} + \log\frac{1}{|\Sigma_i|^{1/2}} = \log\frac{1}{|\Sigma_i|^{1/2}} = -\frac{1}{2}\log{|\Sigma_i|}
+	\end{equation*}
+	lets describe a function $G_i(x)$ as $log(P(Y=y)) -\frac{1}{2}\log{|\Sigma_i|} -\frac{1}{2}(x-m_i)^T\Sigma_i^{-1}(x-m_i) $ then from this we would need to solve this for each $\Sigma_i$ this would make the problem quadratic in nature. The optimal decision surface would be a quadratic curve.
+	 
+	\end{enumerate}
+	
+	\textbf{Problem 3.} (55 points) Consider a multivariate linear regression problem of mapping $\mathbb{R}^d$ to $\mathbb{R}$ with two different objective functions. The first objective function is the sum of squared errors, as presented in class; i.e., $\sum_{i=1}^n{e^2_i}$ where $e_i = w_0 + \sum_{j=1}^d w_jx_{ij}-y_i$. The second objective function is the sum of square Euclidean distances to the hyperplane; i.e., $\sum_{i=1}^nr_i^2$, where $r_i$ is the Euclidean distance between point $(x_i, y_i)$ to the hyperplane $f(x) = w_0 + \sum_{j=1}^dw_jx_j$.
+	
+	\begin{enumerate}
+	\item[a)] (10 points) Derive a gradient descent algorithm to find the parameters of the model that minimizes the sum of squared errors.
+	\begin{equation*}
+	\begin{split}
+	\text{Let } W & = \{w_0, w_1, w_2, \dots w_d \} \\
+	\text{Intialize } W^{(t=0)} & \text{ with random values or 0s} \\
+	\text{Let } \alpha & \in (0 , 1) \\
+	\text{Set } \frac{\delta}{\delta w_j} & \sum_{i=1}^n{e^2_i} \text{ as the cost function} \quad j = 0,1, \dots d\\
+	-\frac{\delta}{\delta w_j} \sum_{i=1}^n{e^2_i} & = \begin{cases}
+	\frac{\delta}{\delta w_0} & = 2 \ y_i - \sum_{j=1}^d(w_jx_{ij})(x_{i0}) \\
+	\frac{\delta}{\delta w_1} & = 2 \ y_i -\sum_{j=1}^d(w_jx_{ij})(x_{i1}) \\
+	\vdots \\
+	\frac{\delta}{\delta w_d} & = 2 \ y_i - \sum_{j=1}^d(w_jx_{ij})(x_{id}) \\
+	\end{cases} \\
+	\text{repeat until convergence: \{} \\
+	W^{t+1} & = W^{t} - \alpha(-\frac{\delta}{\delta w_j} \sum_{i=1}^n{e^2_i}) \\
+	t & =  t + 1 \\ 
+	\}
+	\end{split}
+	\end{equation*}
+	\item[b)] (20 points) Derive a gradient descent algorithm to find the parameters of the model that minimizes the sum of squared distances.
+	\begin{equation*}
+	\begin{split}
+		r_i &= \frac{f(x_i)-y_i}{||w||} \\
+		\text{which can be written as} \\
+		r_i &= \frac{w^Tx_i -y_i}{||w||} \\
+		r_i^2  & = \frac{(w^Tx_i -y_i)^2}{||w||^2} \\
+		\text{for sum of }r_i^2 \text{ assume } X \text{ is the matrix of all } x_i & \text{ assume } Y \text{ is a column vector and } W \text{ is a row vector.} \\
+		 \sum r_i^2 & = (\frac{(W^TX -Y)}{||W||})^2 \\
+		 \nabla_W \sum r^2 & = 2(\frac{(W^TX -Y)}{||W||})((1/\|w\|\cdot X)^T -1/\|w\|^{3}\cdot (X^Tw-y)\cdot w^T ) \\
+		 \text{our algorithm follows:} \\
+		 	\text{Let } W & = \{w_0, w_1, w_2, \dots w_d \} \\
+	\text{Intialize } W^{(t=0)} & \text{ with random values} \\
+	\text{Let } \alpha & \in (0 , 1) \\
+		 	\text{repeat until convergence: \{} \\
+	W^{t+1} & = W^{t} - \alpha(\nabla_W \sum_{i=1}^n{r^2}) \\
+	t & =  t + 1 \\ 
+	\}
+	\end{split}
+	\end{equation*}
+	
+	\item[c)] (20 pooints
+	) Implement both algorithms and test them on 3 datasets. Datasets can be randomly generated, as in class, or obtained from resources such as UCI Machine Learning Repository. Compare the solutions to the closed-form (maximum likelihood) solution derived in class and find the $R^2$ in all cases on the same dataset used to fit the parameters; i.e., do not implement cross-validation. Briefly describe the data you use and discuss your results. 
+	
+	item c answered with item d
+\item[d)] (5 points) Normalize every feature and target using a linear transform such that the minimum value for each feature and the target is 0 and the maximum value is 1. The new value for feature j of data point i can be found as
+
+\begin{equation*}
+x_{ij}^{\text{new}} = \frac{x_{ij} - \text{min}_{k \in \{1,2,3, \cdots, n \}}x_{kj}}{\text{max}_{k \in \{1,2,3, \cdots, n \}}x_{kj} - \text{min}_{k \in \{1,2,3, \cdots, n \}}x_{kj}}
+\end{equation*}
+where $n$ is the dataset size. the new value for the target $i$ can be found as
+\begin{equation*}
+y_{ij}^{\text{new}} = \frac{y_{i} - \text{min}_{k \in \{1,2,3, \cdots, n \}}y_{k}}{\text{max}_{k \in \{1,2,3, \cdots, n \}}y_{k} - \text{min}_{k \in \{1,2,3, \cdots, n \}}y_{k}}
+\end{equation*}
+
+Measure the number of steps towards convergence and compare with the results from part (c). Briefly
+discuss your results.
+
+I selected 3 datasets form UCI, which include ratings for red wine, data on concrete and data on airfoil noise. Each of these dataset had a different number of input data and only 1 output column which made them good candidates for regression. The full results for each data set for this experiment  and each method is included in the data folder in a csv titled final\_data.csv
+some trends were that for $SSE$ the normalization returned results which were closer to the maximum likeliness and the step count was way reduced before hitting convergence. Interestingly the $SED$ the step cap of 100000 4 times, twice on normalized data and twice without. This makes me question the validity of using euclidean distance to the hyperplane as an objective function for gradient descent.  Overall $R^2$ were better after normalization, showing that normalization of data as pre-processing with greatly affect the overall performance of gradient descent. 
+	 
+	\end{enumerate}
+\end{document}
